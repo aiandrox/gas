@@ -10,3 +10,11 @@ See, edit, share, and permanently delete all the calendars you can access using 
 
 毎月10日: `sendSchedulesNextMonth`
 毎月20日: `calculateVotes`
+
+## スクリプトの更新手順
+
+```sh
+clasp login
+npm run build
+npm run push
+```

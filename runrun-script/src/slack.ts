@@ -1,6 +1,7 @@
 import { SlackReactionResponse } from "./models/slack";
 
 const channelId = "C0284B80WSY"; // #月一定期勉強会企画
+// const channelId = "C02DY8KMF7Y"; // #test-bot
 const accessToken = PropertiesService.getScriptProperties().getProperty(
   "SLACK_BOT_USER_OAUTH_TOKEN"
 );
