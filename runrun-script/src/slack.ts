@@ -5,6 +5,7 @@ const channelId = "C0284B80WSY"; // #月一定期勉強会企画
 const accessToken = PropertiesService.getScriptProperties().getProperty(
   "SLACK_BOT_USER_OAUTH_TOKEN"
 );
+export const stampName = ":raised_hands:";
 
 export const sendSlack = (message: string) => {
   const endpoint = "https://slack.com/api/chat.postMessage";

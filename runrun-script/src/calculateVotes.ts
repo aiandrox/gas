@@ -1,6 +1,6 @@
 import { getSlackUserMention, getSlackUsersMention } from "./format";
 import { SlackMessage } from "./models/slack";
-import { getReactions, sendSlack } from "./slack";
+import { getReactions, sendSlack, stampName } from "./slack";
 import { getSpreadSheetValues } from "./spreadSheet";
 
 type FormattedMessage = {
@@ -43,7 +43,7 @@ function formatted(messages: SlackMessage[]) {
   const reactedMessages = messages.filter((message) => message.reactions);
 
   return reactedMessages.map((message) => {
-    const raisedHands = message.reactions.find((r) => r.name === "raised_hands");
+    const raisedHands = message.reactions.find((r) => r.name === stampName);
     const formattedMessage: FormattedMessage = {
       text: message.text,
       voteCount: raisedHands?.count ?? 0,
