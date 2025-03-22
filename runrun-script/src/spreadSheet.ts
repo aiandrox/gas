@@ -1,14 +1,14 @@
-export function clearSpreadSheet() {
+export const clearSpreadSheet=()=> {
   const sheet = getSpreadSheet("schedule");
   sheet?.clear();
 }
 
-export function writeSpreadSheet(array: string[][]) {
+export const writeSpreadSheet=(array: string[][])=> {
   const sheet = getSpreadSheet("schedule");
   sheet?.getRange(1, 1, array.length, array[0].length).setValues(array);
 }
 
-export function getSpreadSheet(name: string) {
+export const getSpreadSheet=(name: string)=> {
   const spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = spreadSheet.getSheetByName(name);
   if (!sheet) {

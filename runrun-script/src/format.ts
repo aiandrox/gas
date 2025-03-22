@@ -1,4 +1,4 @@
-export function getDateText(date: GoogleAppsScript.Base.Date, names: string[]) {
+export const getDateText = (date: GoogleAppsScript.Base.Date, names: string[])=> {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -6,10 +6,10 @@ export function getDateText(date: GoogleAppsScript.Base.Date, names: string[]) {
   return `${year}/${month}/${day} (${name})`;
 }
 
-export function getSlackUsersMention(userIds: string[]) {
+export const getSlackUsersMention = (userIds: string[])=> {
   return userIds.map((userId) => getSlackUserMention(userId)).join(" ");
 }
 
-export function getSlackUserMention(userId: string) {
+export const getSlackUserMention =(userId: string)=> {
   return `<@${userId}>`;
 }

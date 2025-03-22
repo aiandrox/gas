@@ -6,7 +6,7 @@ type Holiday = {
   names: string[];
 };
 
-export function getHolidays(startDate: Date, endDate: Date) {
+export const getHolidays=(startDate: Date, endDate: Date) =>{
   let holidays: Holiday[] = [];
 
   // 土日を追加

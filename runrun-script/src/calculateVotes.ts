@@ -45,7 +45,7 @@ function formatted(messages: SlackMessage[]) {
   });
 }
 
-function selectedDate(formattedMessages: FormattedMessage[]) {
+const selectedDate = (formattedMessages: FormattedMessage[]) =>{
   const maxCount = Math.max(...formattedMessages.map((message) => message.voteCount));
   const maxCountMessages = formattedMessages.filter((message) => message.voteCount === maxCount);
   const selectedMessage = maxCountMessages[Math.floor(Math.random() * maxCountMessages.length)];
