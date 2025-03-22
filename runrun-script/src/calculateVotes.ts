@@ -1,7 +1,7 @@
 import { getSlackUserMention, getSlackUsersMention } from "./format";
 import { SlackMessage } from "./models/slack";
 import { getReactions, sendSlack } from "./slack";
-import { getSpreadSheet } from "./spreadSheet";
+import { getSpreadSheetValues } from "./spreadSheet";
 
 type FormattedMessage = {
   text: string;
@@ -10,8 +10,8 @@ type FormattedMessage = {
 };
 
 export const calculateVotes = () => {
-  const scheduleSheet = getSpreadSheet("schedule");
-  const schedules = scheduleSheet.getDataRange().getValues();
+  const schedules = getSpreadSheetValues();
+
   let messages: SlackMessage[] = [];
   schedules.forEach((schedule) => {
     const timestamp = schedule[1];
@@ -20,7 +20,15 @@ export const calculateVotes = () => {
   });
 
   const formattedMessages = formatted(messages);
-  const selected = selectedDate(formattedMessages);
+  const maxVoteCount = Math.max(...formattedMessages.map((message) => message.voteCount));
+  if (maxVoteCount === 0) {
+    const message = `<!channel>
+    次回の日程は決まりませんでした。`;
+    sendSlack(message);
+    return;
+  }
+
+  const selected = selectedDate(formattedMessages, maxVoteCount);
   const message = `<!channel>
   次回の日程は「${selected.text}」に決定しました。
   ※ユーザ数が同列だった場合は、ランダムで決定します。
@@ -45,9 +53,10 @@ function formatted(messages: SlackMessage[]) {
   });
 }
 
-const selectedDate = (formattedMessages: FormattedMessage[]) =>{
-  const maxCount = Math.max(...formattedMessages.map((message) => message.voteCount));
-  const maxCountMessages = formattedMessages.filter((message) => message.voteCount === maxCount);
+const selectedDate = (formattedMessages: FormattedMessage[], maxVoteCount: number) => {
+  const maxCountMessages = formattedMessages.filter(
+    (message) => message.voteCount === maxVoteCount
+  );
   const selectedMessage = maxCountMessages[Math.floor(Math.random() * maxCountMessages.length)];
   const users = selectedMessage.users;
 
@@ -56,4 +65,4 @@ const selectedDate = (formattedMessages: FormattedMessage[]) =>{
     users: users,
     representative: users[Math.floor(Math.random() * users.length)],
   };
-}
+};

@@ -6,7 +6,7 @@ type Holiday = {
   names: string[];
 };
 
-export const getHolidays=(startDate: Date, endDate: Date) =>{
+export const getHolidays = (startDate: Date, endDate: Date) => {
   let holidays: Holiday[] = [];
 
   // 土日を追加
@@ -31,7 +31,7 @@ export const getHolidays=(startDate: Date, endDate: Date) =>{
   }
 
   return holidays.sort((a, b) => a.date.getTime() - b.date.getTime());
-}
+};
 
 const getHolidaysFromGoogleCalendar = (startDate: Date, endDate: Date) => {
   const calendar = CalendarApp.getCalendarById(holidayCalendarId);
