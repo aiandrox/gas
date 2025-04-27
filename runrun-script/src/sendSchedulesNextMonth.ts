@@ -15,7 +15,7 @@ export const sendSchedulesNextMonth = () => {
   sendSlack(message);
 
   const nextBeginningOfMonth = new Date(today.getFullYear(), thisMonth + 1, 1); // 次の月の1日
-  const nextEndOfMonth = new Date(today.getFullYear(), thisMonth + 2, 0); // 次の次の月の最終日
+  const nextEndOfMonth = new Date(today.getFullYear(), thisMonth + 2, 0); // 次の月の最終日
   const holidays = getHolidays(nextBeginningOfMonth, nextEndOfMonth);
 
   let spreadSheetData: string[][] = [];
