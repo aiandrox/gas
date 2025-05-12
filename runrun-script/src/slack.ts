@@ -1,13 +1,12 @@
 import { SlackReactionResponse } from "./models/slack";
 
-const channelId = "C0284B80WSY"; // #月一定期勉強会企画
-// const channelId = "C02DY8KMF7Y"; // #test-bot
-const accessToken = PropertiesService.getScriptProperties().getProperty(
-  "SLACK_BOT_USER_OAUTH_TOKEN"
-);
 export const stampName = ":raised_hands:";
 
 export const sendSlack = (message: string) => {
+  const channelId = PropertiesService.getScriptProperties().getProperty("SLACK_CHANNEL_ID");
+  const accessToken = PropertiesService.getScriptProperties().getProperty(
+    "SLACK_BOT_USER_OAUTH_TOKEN"
+  );
   const endpoint = "https://slack.com/api/chat.postMessage";
 
   const payload = {
@@ -31,6 +30,10 @@ export const sendSlack = (message: string) => {
 };
 
 export const getReactions = (timestamp: string) => {
+  const channelId = PropertiesService.getScriptProperties().getProperty("SLACK_CHANNEL_ID");
+  const accessToken = PropertiesService.getScriptProperties().getProperty(
+    "SLACK_BOT_USER_OAUTH_TOKEN"
+  );
   const endpoint = `https://slack.com/api/reactions.get?channel=${channelId}&timestamp=${timestamp}`;
 
   const options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {

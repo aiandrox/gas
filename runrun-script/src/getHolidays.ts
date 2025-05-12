@@ -1,5 +1,5 @@
 // 日本の祝日カレンダーで祝日を追加
-const holidayCalendarId = "ja.japanese#holiday@group.v.calendar.google.com";
+const holidayCalendarId = "ja.japanese.official#holiday@group.v.calendar.google.com";
 
 type Holiday = {
   date: GoogleAppsScript.Base.Date;
@@ -9,8 +9,8 @@ type Holiday = {
 export const getHolidays = (startDate: Date, endDate: Date) => {
   let holidays: Holiday[] = [];
 
-  // 土日を追加
-  for (let day = startDate; day <= endDate; day.setDate(day.getDate() + 1)) {
+  // 土日をholidaysに追加
+  for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
     if (day.getDay() === 0 || day.getDay() === 6) {
       // 0: Sunday, 6: Saturday
       const dayName = day.getDay() === 0 ? "日" : "土";
@@ -18,6 +18,7 @@ export const getHolidays = (startDate: Date, endDate: Date) => {
     }
   }
 
+  // 祝日をholidaysに追加
   const events = getHolidaysFromGoogleCalendar(startDate, endDate);
   for (let i in events) {
     const date = events[i].getStartTime();
