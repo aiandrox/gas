@@ -15,6 +15,5 @@ See, edit, share, and permanently delete all the calendars you can access using 
 
 ```sh
 clasp login
-npm run build
-npm run push
+npm run deploy
 ```
