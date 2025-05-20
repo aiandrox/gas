@@ -9,7 +9,7 @@ export const sendSchedulesNextMonth = () => {
 
   const message = `<!channel>
   次回の勉強会の日程調整を行います。
-  参加できる日程に、${stampName} を付けてください。
+  参加できる日程に、:${stampName}: を付けてください。
   期限は${thisMonth + 1}月19日までです。`;
 
   sendSlack(message);

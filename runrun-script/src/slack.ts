@@ -1,6 +1,6 @@
 import { SlackReactionResponse } from "./models/slack";
 
-export const stampName = ":raised_hands:";
+export const stampName = "raised_hands";
 
 export const sendSlack = (message: string) => {
   const channelId = PropertiesService.getScriptProperties().getProperty("SLACK_CHANNEL_ID");
